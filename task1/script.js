@@ -1,6 +1,4 @@
 let pairList = [];
-pairList.push({});
-pairList.splice(0, 1);
 
 function showErrorModal(message) {
     document.getElementById('errorMessageText').textContent = message;
@@ -46,7 +44,7 @@ function printList() {
     container.innerText = '';
     pairList.forEach((pair, index) => {
         const p = document.createElement('p');
-        p.textContent = `${pair.name} = ${pair.value}`;
+        p.innerText = `${pair.name} = ${pair.value}`;
         p.dataset.index = index;
         p.addEventListener('click', (e) => {
             p.classList.toggle('selected');
@@ -85,10 +83,10 @@ function sortPairName() {
 function sortPairValue() {
     pairList.sort((a, b) => {
         if (a.value < b.value) {
-            return -11;
+            return -1;
         }
         if (a.value > b.value) {
-            return 11;
+            return 1;
         }
         return 0;
     });

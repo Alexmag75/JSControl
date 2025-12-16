@@ -2,13 +2,9 @@
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
 
-    console.log(userId);
-    document.body.appendChild(detailsContainer);
-
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-        .then(users => users.json()
-        ).then(user => {
-
+        .then(users => users.json())
+        .then(user => {
             const Id=document.createElement('h3');
             Id.innerText=`User Id: ${user.id}`
             const Name=document.createElement('h3');
@@ -29,7 +25,7 @@
         detailsContainer.append(Id,Name,userName,userMail,userSait,userPhone,userCompany,userAddress);
 
         })
-            document.body.appendChild(detailsContainer);
+        document.body.appendChild(detailsContainer);
 
             const btnUserPost=document.createElement('button');
             let postsLoaded = false; //флаг для определения выведены ли посты
@@ -42,11 +38,11 @@
 
                 fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
                     .then(value => value.json())
-                    .then(UsersPosts => {
+                    .then(usersPosts => {
                         postsLoaded = true;
                         const boxPost=document.createElement('div');
                         boxPost.classList.add('boxPost');
-                        for(let userPost of UsersPosts) {
+                        for(let userPost of usersPosts) {
                                 const postBtn=document.createElement('div');
                                 postBtn.classList.add('postBtn');
 
@@ -58,17 +54,15 @@
                                 btnUserPost.classList.add('btnPost');
                                 btnUserPost.innerText=`post-details`
                                 btnUserPost.addEventListener('click', (event)=>{
-                                    window.location.href = `post-details.html?userPost.id=${userPost.id}&userId=${userId}`;
+                                    window.location.href = `post-details.html?userPost=${userPost.id}&userId=${userId}`;
                                 })
                                 postBtn.append(post,btnUserPost);
                                 boxPost.appendChild(postBtn);
                             }
                            document.body.appendChild(boxPost);
-
-
                     })
             })
-            document.body.appendChild(btnUserPost);
+        document.body.appendChild(btnUserPost);
 
 
 
